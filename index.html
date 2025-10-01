@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypeScript Notes</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0d1117;
+            color: #c9d1d9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1a1e29 0%, #2d333b 100%);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header h1 {
+            color: #58a6ff;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: #8b949e;
+            font-size: 1.1rem;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #238636 0%, #2ea043 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(46, 160, 67, 0.4);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .section h2 {
+            color: #58a6ff;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #21262d;
+        }
+
+        .section h3 {
+            color: #79c0ff;
+            font-size: 1.4rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .explanation {
+            background: #0d1117;
+            padding: 1rem;
+            border-left: 4px solid #58a6ff;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+        }
+
+        .code-block {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .code-block pre {
+            margin: 0;
+            color: #c9d1d9;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .keyword {
+            color: #ff7b72;
+        }
+
+        .type {
+            color: #79c0ff;
+        }
+
+        .string {
+            color: #a5d6ff;
+        }
+
+        .comment {
+            color: #8b949e;
+            font-style: italic;
+        }
+
+        .function {
+            color: #d2a8ff;
+        }
+
+        ul {
+            margin-left: 2rem;
+            margin-top: 0.5rem;
+        }
+
+        ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight {
+            background: #1f6feb;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+
+        @media print {
+            .header {
+                position: static;
+            }
+            .download-btn {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📘 TypeScript Complete Notes</h1>
+        <p>Comprehensive Guide with Examples</p>
+        <button class="download-btn" onclick="downloadPDF()">📥 Download as PDF</button>
+    </div>
+
+    <div class="container" id="content">
+        <!-- 1. TypeScript Data Types -->
+        <div class="section">
+            <h2>1. TypeScript Data Types</h2>
+            <div class="explanation">
+                <p>TypeScript provides several built-in data types to help you write type-safe code. These types help catch errors during development rather than at runtime.</p>
+            </div>
+
+            <h3>Basic Types</h3>
+            <div class="code-block">
+                <pre><span class="comment">// String - for text data</span>
+<span class="keyword">let</span> username: <span class="type">string</span> = <span class="string">"John Doe"</span>;
+
+<span class="comment">// Number - for numeric values (integers and floats)</span>
+<span class="keyword">let</span> age: <span class="type">number</span> = 25;
+<span class="keyword">let</span> price: <span class="type">number</span> = 99.99;
+
+<span class="comment">// Boolean - for true/false values</span>
+<span class="keyword">let</span> isActive: <span class="type">boolean</span> = true;
+
+<span class="comment">// Array - collection of elements</span>
+<span class="keyword">let</span> numbers: <span class="type">number[]</span> = [1, 2, 3, 4, 5];
+<span class="keyword">let</span> names: <span class="type">Array&lt;string&gt;</span> = [<span class="string">"Alice"</span>, <span class="string">"Bob"</span>];
+
+<span class="comment">// Tuple - fixed-length array with known types</span>
+<span class="keyword">let</span> person: [<span class="type">string</span>, <span class="type">number</span>] = [<span class="string">"Alice"</span>, 30];
+
+<span class="comment">// Enum - named constants</span>
+<span class="keyword">enum</span> <span class="type">Color</span> {
+    Red,
+    Green,
+    Blue
+}
+<span class="keyword">let</span> favoriteColor: <span class="type">Color</span> = Color.Blue;
+
+<span class="comment">// Any - opt-out of type checking</span>
+<span class="keyword">let</span> randomValue: <span class="type">any</span> = 10;
+randomValue = <span class="string">"Hello"</span>; <span class="comment">// No error</span>
+
+<span class="comment">// Unknown - type-safe version of any</span>
+<span class="keyword">let</span> userInput: <span class="type">unknown</span> = 10;
+<span class="comment">// userInput.toUpperCase(); // Error: need type checking first</span>
+
+<span class="comment">// Void - absence of return value</span>
+<span class="keyword">function</span> <span class="function">logMessage</span>(message: <span class="type">string</span>): <span class="type">void</span> {
+    console.log(message);
+}
+
+<span class="comment">// Null and Undefined</span>
+<span class="keyword">let</span> n: <span class="type">null</span> = null;
+<span class="keyword">let</span> u: <span class="type">undefined</span> = undefined;
+
+<span class="comment">// Never - values that never occur</span>
+<span class="keyword">function</span> <span class="function">throwError</span>(message: <span class="type">string</span>): <span class="type">never</span> {
+    <span class="keyword">throw new</span> Error(message);
+}
+
+<span class="comment">// Object - non-primitive type</span>
+<span class="keyword">let</span> user: <span class="type">object</span> = { name: <span class="string">"John"</span>, age: 30 };</pre>
+            </div>
+        </div>
+
+        <!-- 2. Assertions -->
+        <div class="section">
+            <h2>2. Type Assertions</h2>
+            <div class="explanation">
+                <p>Type assertions allow you to tell TypeScript that you know more about a value's type than TypeScript does. It's like type casting in other languages but doesn't perform any special checking or restructuring of data.</p>
+            </div>
+
+            <div class="code-block">
+                <pre><span class="comment">// Method 1: Angle-bracket syntax</span>
+<span class="keyword">let</span> someValue: <span class="type">any</span> = <span class="string">"This is a string"</span>;
+<span class="keyword">let</span> strLength: <span class="type">number</span> = (&lt;<span class="type">string</span>&gt;someValue).length;
+
+<span class="comment">// Method 2: 'as' syntax (preferred in JSX)</span>
+<span class="keyword">let</span> anotherValue: <span class="type">any</span> = <span class="string">"Hello TypeScript"</span>;
+<span class="keyword">let</span> length: <span class="type">number</span> = (anotherValue <span class="keyword">as</span> <span class="type">string</span>).length;
+
+<span class="comment">// Practical example: DOM manipulation</span>
+<span class="keyword">const</span> inputElement = document.getElementById(<span class="string">"myInput"</span>) <span class="keyword">as</span> <span class="type">HTMLInputElement</span>;
+inputElement.value = <span class="string">"Hello"</span>;
+
+<span class="comment">// Non-null assertion operator (!)</span>
+<span class="keyword">function</span> <span class="function">getValue</span>(key: <span class="type">string</span>): <span class="type">string</span> | <span class="type">undefined</span> {
+    <span class="keyword">return</span> key === <span class="string">"name"</span> ? <span class="string">"John"</span> : undefined;
+}
+<span class="keyword">let</span> name = getValue(<span class="string">"name"</span>)!; <span class="comment">// Assert it's not null/undefined</span>
+
+<span class="comment">// Const assertions</span>
+<span class="keyword">let</span> config = {
+    endpoint: <span class="string">"https://api.example.com"</span>,
+    timeout: 5000
+} <span class="keyword">as const</span>; <span class="comment">// Makes properties readonly</span></pre>
+            </div>
+        </div>
+
+        <!-- 3. Type Inference -->
+        <div class="section">
+            <h2>3. Type Inference</h2>
+            <div class="explanation">
+                <p>Type inference is TypeScript's ability to automatically determine the type of a variable based on its value. This means you don't always need to explicitly specify types.</p>
+            </div>
+
+            <div class="code-block">
+                <pre><span class="comment">// Basic inference</span>
+<span class="keyword">let</span> message = <span class="string">"Hello"</span>; <span class="comment">// TypeScript infers type: string</span>
+<span class="keyword">let</span> count = 42; <span class="comment">// TypeScript infers type: number</span>
+<span class="keyword">let</span> isValid = true; <span class="comment">// TypeScript infers type: boolean</span>
+
+<span class="comment">// Array inference</span>
+<span class="keyword">let</span> numbers = [1, 2, 3]; <span class="comment">// TypeScript infers: number[]</span>
+<span class="keyword">let</span> mixed = [1, <span class="string">"two"</span>, 3]; <span class="comment">// TypeScript infers: (string | number)[]</span>
+
+<span class="comment">// Object inference</span>
+<span class="keyword">let</span> person = {
+    name: <span class="string">"Alice"</span>,
+    age: 30
+}; <span class="comment">// TypeScript infers: { name: string; age: number; }</span>
+
+<span class="comment">// Function return type inference</span>
+<span class="keyword">function</span> <span class="function">add</span>(a: <span class="type">number</span>, b: <span class="type">number</span>) {
+    <span class="keyword">return</span> a + b; <span class="comment">// Return type inferred as number</span>
+}
+
+<span class="comment">// Contextual typing - type inferred from context</span>
+window.addEventListener(<span class="string">"click"</span>, <span class="keyword">function</span>(event) {
+    <span class="comment">// 'event' is inferred as MouseEvent</span>
+    console.log(event.clientX, event.clientY);
+});
+
+<span class="comment">// Best common type</span>
+<span class="keyword">let</span> items = [1, 2, null]; <span class="comment">// Inferred as: (number | null)[]</span></pre>
+            </div>
+        </div>
+
+        <!-- 4. Combining Types -->
+        <div class="section">
+            <h2>4. Combining Types</h2>
+            <div class="explanation">
+                <p>TypeScript allows you to combine types using Union Types (|) and Intersection Types (&) to create more complex and flexible type definitions.</p>
+            </div>
+
+            <h3>Union Types (|)</h3>
+            <div class="code-block">
+                <pre><span class="comment">// Union types - value can be one of several types</span>
+<span class="keyword">let</span> id: <span class="type">number</span> | <span class="type">string</span>;
+id = 101; <span class="comment">// Valid</span>
+id = <span class="string">"ABC123"</span>; <span class="comment">// Valid</span>
+
+<span class="comment">// Function with union parameter</span>
+<span class="keyword">function</span> <span class="function">formatValue</span>(value: <span class="type">string</span> | <span class="type">number</span>): <span class="type">string</span> {
+    <span class="keyword">return</span> `Value: ${value}`;
+}
+
+<span class="comment">// Union with literal types</span>
+<span class="keyword">type</span> <span class="type">Status</span> = <span class="string">"pending"</span> | <span class="string">"approved"</span> | <span class="string">"rejected"</span>;
+<span class="keyword">let</span> orderStatus: <span class="type">Status</span> = <span class="string">"pending"</span>;</pre>
+            </div>
+
+            <h3>Intersection Types (&)</h3>
+            <div class="code-block">
+                <pre><span class="comment">// Intersection types - combines multiple types</span>
+<span class="keyword">interface</span> <span class="type">Person</span> {
+    name: <span class="type">string</span>;
+    age: <span class="type">number</span>;
+}
+
+<span class="keyword">interface</span> <span class="type">Employee</span> {
+    employeeId: <span class="type">number</span>;
+    department: <span class="type">string</span>;
+}
+
+<span class="keyword">type</span> <span class="type">Staff</span> = Person & Employee;
+
+<span class="keyword">let</span> employee: <span class="type">Staff</span> = {
+    name: <span class="string">"John"</span>,
+    age: 30,
+    employeeId: 12345,
+    department: <span class="string">"IT"</span>
+};
+
+<span class="comment">// Combining multiple types</span>
+<span class="keyword">type</span> <span class="type">Admin</span> = Person & Employee & { role: <span class="type">string</span> };</pre>
+            </div>
+        </div>
+
+        <!-- 5. Type Guards/Narrowing -->
+        <div class="section">
+            <h2>5. Type Guards / Narrowing</h2>
+            <div class="explanation">
+                <p>Type guards are techniques to narrow down the type of a variable within a conditional block. This helps TypeScript understand what type a variable is at runtime.</p>
+            </div>
+
+            <div class="code-block">
+                <pre><span class="comment">// typeof type guard</span>
+<span class="keyword">function</span> <span class="function">printValue</span>(value: <span class="type">string</span> | <span class="type">number</span>) {
+    <span class="keyword">if</span> (<span class="keyword">typeof</span> value === <span class="string">"string"</span>) {
+        console.log(value.toUpperCase()); <span class="comment">// TypeScript knows it's a string</span>
+    } <span class="keyword">else</span> {
+        console.log(value.toFixed(2)); <span class="comment">// TypeScript knows it's a number</span>
+    }
+}
+
+<span class="comment">// instanceof type guard</span>
+<span class="keyword">class</span> <span class="type">Dog</span> {
+    bark() { console.log(<span class="string">"Woof!"</span>); }
+}
+
+<span class="keyword">class</span> <span class="type">Cat</span> {
+    meow() { console.log(<span class="string">"Meow!"</span>); }
+}
+
+<span class="keyword">function</span> <span class="function">makeSound</span>(animal: <span class="type">Dog</span> | <span class="type">Cat</span>) {
+    <span class="keyword">if</span> (animal <span class="keyword">instanceof</span> Dog) {
+        animal.bark();
+    } <span class="keyword">else</span> {
+        animal.meow();
+    }
+}
+
+<span class="comment">// in operator type guard</span>
+<span class="keyword">interface</span> <span class="type">Fish</span> {
+    swim: () => <span class="type">void</span>;
+}
+
+<span class="keyword">interface</span> <span class="type">Bird</span> {
+    fly: () => <span class="type">void</span>;
+}
+
+<span class="keyword">function</span> <span class="function">move</span>(animal: <span class="type">Fish</span> | <span class="type">Bird</span>) {
+    <span class="keyword">if</span> (<span class="string">"swim"</span> <span class="keyword">in</span> animal) {
+        animal.swim();
+    } <span class="keyword">else</span> {
+        animal.fly();
+    }
+}
+
+<span class="comment">// Custom type guard function</span>
+<span class="keyword">function</span> <span class="function">isString</span>(value: <span class="type">any</span>): value <span class="keyword">is</span> <span class="type">string</span> {
+    <span class="keyword">return</span> <span class="keyword">typeof</span> value === <span class="string">"string"</span>;
+}
+
+<span class="keyword">function</span> <span class="function">process</span>(value: <span class="type">string</span> | <span class="type">number</span>) {
+    <span class="keyword">if</span> (isString(value)) {
+        console.log(value.length); <span class="comment">// Safe to use string methods</span>
+    }
+}
+
+<span class="comment">// Truthiness narrowing</span>
+<span class="keyword">function</span> <span class="function">printName</span>(name?: <span class="type">string</span>) {
+    <span class="keyword">if</span> (name) {
+        console.log(name.toUpperCase());
+    } <span class="keyword">else</span> {
+        console.log(<span class="string">"No name provided"</span>);
+    }
+}</pre>
+            </div>
+        </div>
+
+        <!-- 6. Interface -->
+        <div class="section">
+            <h2>6. Interface</h2>
+            <div class="explanation">
+                <p>Interfaces define the structure of an object. They describe what properties and methods an object should have, providing a contract that objects must follow.</p>
+            </div>
+
+            <div class="code-block">
+                <pre><span class="comment">// Basic interface</span>
+<span class="keyword">interface</span> <span class="type">User</span> {
+    id: <span class="type">number</span>;
+    name: <span class="type">string</span>;
+    email: <span class="type">string</span>;
+}
+
+<span class="keyword">let</span> user: <span class="type">User</span> = {
+    id: 1,
+    name: <span class="string">"John Doe"</span>,
+    email: <span class="string">"john@example.com"</span>
+};
+
+<span class="comment">// Optional properties</span>
+<span class="keyword">interface</span> <span class="type">Product</span> {
+    id: <span class="type">number</span>;
+    name: <span class="type">string</span>;
+    description?: <span class="type">string</span>; <span class="comment">// Optional</span>
+    price: <span class="type">number</span>;
+}
+
+<span class="comment">// Readonly properties</span>
+<span class="keyword">interface</span> <span class="type">Config</span> {
+    <span class="keyword">readonly</span> apiKey: <span class="type">string</span>;
+    <span class="keyword">readonly</span> endpoint: <span class="type">string</span>;
+}
+
+<span class="keyword">let</span> config: <span class="type">Config</span> = {
+    apiKey: <span class="string">"abc123"</span>,
+    endpoint: <span class="string">"https://api.example.com"</span>
+};
+<span class="comment">// config.apiKey = "new-key"; // Error: cannot modify readonly property</span>
+
+<span class="comment">// Function types in interface</span>
+<span class="keyword">interface</span> <span class="type">Calculator</span> {
+    add: (a: <span class="type">number</span>, b: <span class="type">number</span>) => <span class="type">number</span>;
+    subtract: (a: <span class="type">number</span>, b: <span class="type">number</span>) => <span class="type">number</span>;
+}
+
+<span class="comment">// Extending interfaces</span>
+<span class="keyword">interface</span> <span class="type">Animal</span> {
+    name: <span class="type">string</span>;
+    age: <span class="type">number</span>;
+}
+
+<span class="keyword">interface</span> <span class="type">Dog</span> <span class="keyword">extends</span> <span class="type">Animal</span> {
+    breed: <span class="type">string</span>;
+    bark(): <span class="type">void</span>;
+}
+
+<span class="keyword">let</span> myDog: <span class="type">Dog</span> = {
+    name: <span class="string">"Buddy"</span>,
+    age: 3,
+    breed: <span class="string">"Golden Retriever"</span>,
+    bark() { console.log(<span class="string">"Woof!"</span>); }
+};
+
+<span class="comment">// Index signatures</span>
+<span class="keyword">interface</span> <span class="type">StringDictionary</span> {
+    [key: <span class="type">string</span>]: <span class="type">string</span>;
+}
+
+<span class="keyword">let</span> dictionary: <span class="type">StringDictionary</span> = {
+    firstName: <span class="string">"John"</span>,
+    lastName: <span class="string">"Doe"</span>
+};</pre>
+            </div>
+        </div>
+
+        <!-- 7. Types vs Interfaces -->
+        <div class="section">
+            <h2>7. Types vs Interfaces - When to Use Which</h2>
+            <div class="explanation">
+                <p>Both Types and Interfaces can define object shapes, but they have different capabilities and use cases.</p>
+            </div>
+
+            <h3>Key Differences</h3>
+            <div class="code-block">
+                <pre><span class="comment">// INTERFACES - Can be extended and merged</span>
+<span class="keyword">interface</span> <span class="type">Person</span> {
+    name: <span class="type">string</span>;
+}
+
+<span class="keyword">interface</span> <span class="type">Person</span> {
+    age: <span class="type">number</span>;
+} <span class="comment">// Declaration merging - Person now has both properties</span>
+
+<span class="comment">// TYPES - Cannot be merged, but more flexible</span>
+<span class="keyword">type</span> <span class="type">Point</span> = {
+    x: <span class="type">number</span>;
+    y: <span class="type">number</span>;
+};
+
+<span class="comment">// Types can use unions</span>
+<span class="keyword">type</span> <span class="type">ID</span> = <span class="type">number</span> | <span class="type">string</span>;
+
+<span class="comment">// Types can use primitives</span>
+<span class="keyword">type</span> <span class="type">Name</span> = <span class="type">string</span>;
+
+<span class="comment">// Types can use tuples</span>
+<span class="keyword">type</span> <span class="type">Coordinate</span> = [<span class="type">number</span>, <span class="type">number</span>];
+
+<span class="comment">// Types can use utility types</span>
+<span class="keyword">type</span> <span class="type">ReadonlyPerson</span> = Readonly&lt;Person&gt;;
+
+<span class="comment">// Both can extend</span>
+<span class="keyword">interface</span> <span class="type">Employee</span> <span class="keyword">extends</span> <span class="type">Person</span> {
+    employeeId: <span class="type">number</span>;
+}
+
+<span class="keyword">type</span> <span class="type">Manager</span> = Person & {
+    department: <span class="type">string</span>;
+};</pre>
+            </div>
+
+            <h3>When to Use Each</h3>
+            <div class="explanation">
+                <p><span class="highlight">Use Interfaces when:</span></p>
+                <ul>
+                    <li>Defining object shapes and contracts</li>
+                    <li>You need declaration merging</li>
+                    <li>Working with classes</li>
+                    <li>Creating public API definitions</li>
+                </ul>
+                <p><span class="highlight">Use Types when:</span></p>
+                <ul>
+                    <li>Creating unions or intersections</li>
+                    <li>Using primitives, tuples, or functions</li>
+                    <li>Using utility types</li>
+                    <li>Creating complex type manipulations</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 8. Functions -->
+        <div class="section">
+            <h2>8. Functions</h2>
+            <div class="explanation">
+                <p>TypeScript provides various ways to type functions, including parameter types, return types, optional parameters, and function overloads.</p>
+            </div>
+
+            <div class="code-block">
+                <pre><span class="comment">// Basic function with types</span>
+<span class="keyword">function</span> <span class="function">add</span>(a: <span class="type">number</span>, b: <span class="type">number</span>): <span class="type">number</span> {
+    <span class="keyword">return</span> a + b;
+}
+
+<span class="comment">// Optional parameters</span>
+<span class="keyword">function</span> <span class="function">greet</span>(name: <span class="type">string</span>, greeting?: <span class="type">string</span>): <span class="type">string</span> {
+    <span class="keyword">return</span> greeting ? `${greeting}, ${name}` : `Hello, ${name}`;
+}
+
+<span class="comment">// Default parameters</span>
+<span class="keyword">function</span> <span class="function">multiply</span>(a: <span class="type">number</span>, b: <span class="type">number</span> = 1): <span class="type">number</span> {
+    <span class="keyword">return</span> a * b;
+}
+
+<span class="comment">// Rest parameters</span>
+<span class="keyword">function</span> <span class="function">sum</span>(...numbers: <span class="type">number[]</span>): <span class="type">number</span> {
+    <span class="keyword">return</span> numbers.reduce((total, n) => total + n, 0);
+}
+
+<span class="comment">// Function type expression</span>
+<span class="keyword">type</span> <span class="type">MathOperation</span> = (a: <span class="type">number</span>, b: <span class="type">number</span>) => <span class="type">number</span>;
+
+<span class="keyword">const</span> subtract: <span class="type">MathOperation</span> = (a, b) => a - b;
+
+<span class="comment">// Arrow function</span>
+<span class="keyword">const</span> <span class="function">divide</span> = (a: <span class="type">number</span>, b: <span class="type">number</span>): <span class="type">number</span> => {
+    <span class="keyword">if</span> (b === 0) <span class="keyword">throw new</span> Error(<span class="string">"Cannot divide by zero"</span>);
+    <span class="keyword">return</span> a / b;
+};
+
+<span class="comment">// Function overloads</span>
+<span class="keyword">function</span> <span class="function">format</span>(value: <span class="type">string</span>): <span class="type">string</span>;
+<span class="keyword">function</span> <span class="function">format</span>(value: <span class="type">number</span>): <span class="type">string</span>;
+<span class="keyword">function</span> <span class="function">format</span>(value: <span class="type">string</span> | <span class="type">number</span>): <span class="type">string</span> {
+    <span class="keyword">if</span> (<span class="keyword">typeof</span> value === <span class="string">"string"</span>) {
+        <span class="keyword">return</span> value.toUpperCase();
+    }
+    <span class="keyword">return</span> value.toFixed(2);
+}
+
+<span class="comment">// Void return type</span>
+<span class="keyword">function</span> <span class="function">logMessage</span>(message: <span class="type">string</span>): <span class="type">void</span> {
+    console.log(message);
+}
+
+<span class="comment">// Never return type (function never returns)</span>
+<span class="keyword">function</span> <span class="function">throwError</span>(message: <span class="type">string</span>): <span class="type">never</span> {
+    <span class="keyword">throw new</span> Error(message);
+}</pre>
+            </div>
+        </div>
+
+        <!-- 9. Generics -->
+        <div class="section">
+            <h2>9. Generics</h2>
+            <div class="explanation">
+                <p>Generics allow you to create reusable components that work with multiple types while maintaining type safety. They act as type variables that can be passed to functions, classes, and interfaces.</p>
+            </div>
+
+            <div class="code-block">
+                <pre><span class="comment">// Basic generic function</span>
+<span class="keyword">function</span> <span class="function">identity</span>&lt;T&gt;(value: T): T {
+    <span class="keyword">return</span> value;
+}
+
+<span class="keyword">let</span> num = identity&lt;<span class="type">number</span>&gt;(42); <span class="comment">// T is number</span>
+<span class="keyword">let</span> str = identity&lt;<span class="type">string</span>&gt;(<span class="string">"Hello"</span>); <span class="comment">// T is string</span>
+
+<span class="comment">// Generic array function</span>
+<span class="keyword">function</span> <span class="function">getFirstElement</span>&lt;T&gt;(arr: T[]): T | <span class="type">undefined</span> {
+    <span class="keyword">return</span> arr[0];
+}
+
+<span class="keyword">let</span> firstNum = getFirstElement([1, 2, 3]); <span class="comment">// number | undefined</span>
+<span class="keyword">let</span> firstName = getFirstElement([<span class="string">"a"</span>, <span class="string">"b"</span>]); <span class="comment">// string | undefined</span>
+
+<span class="comment">// Generic interface</span>
+<span class="keyword">interface</span> <span class="type">Box</span>&lt;T&gt; {
+    value: T;
+}
+
+<span class="keyword">let</span> numberBox: <span class="type">Box</span>&lt;<span class="type">number</span>&gt; = { value: 123 };
+<span class="keyword">let</span> stringBox: <span class="type">Box</span>&lt;<span class="type">string</span>&gt; = { value: <span class="string">"Hello"</span> };
+
+<span class="comment">// Generic class</span>
+<span class="keyword">class</span> <span class="type">Stack</span>&lt;T&gt; {
+    <span class="keyword">private</span> items: T[] = [];
+
+    push(item: T): <span class="type">void</span> {
+        <span class="keyword">this</span>.items.push(item);
+    }
+
+    pop(): T | <span class="type">undefined</span> {
+        <span class="keyword">return</span> <span class="keyword">this</span>.items.pop();
+    }
+
+    peek(): T | <span class="type">undefined</span> {
+        <span class="keyword">return</span> <span class="keyword">this</span>.items[<span class="keyword">this</span>.items.length - 1];
+    }
+}
+
+<span class="keyword">let</span> numberStack = <span class="keyword">new</span> <span class="type">Stack</span>&lt;<span class="type">number</span>&gt;();
+numberStack.push(1);
+numberStack.push(2);
+
+<span class="comment">// Generic constraints</span>
+<span class="keyword">interface</span> <span class="type">Lengthwise</span> {
+    length: <span class="type">number</span>;
+}
+
+<span class="keyword">function</span> <span class="function">logLength</span>&lt;T <span class="keyword">extends</span> <span class="type">Lengthwise</span>&gt;(item: T): <span class="type">void</span> {
+    console.log(item.length);
+}
+
+logLength(<span class="string">"Hello"</span>); <span class="comment">// Works - string has length</span>
+logLength([1, 2, 3]); <span class="comment">// Works - array has length</span>
+<span class="comment">// logLength(123); // Error - number doesn't have length</span>
+
+<span class="comment">// Multiple type parameters</span>
+<span class="keyword">function</span> <span class="function">pair</span>&lt;T, U&gt;(first: T, second: U): [T, U] {
+    <span class="keyword">return</span> [first, second];
+}
+
+<span class="keyword">let</span> myPair = pair(<span class="string">"age"</span>, 25); <span class="comment">// [string, number]</span>
+
+<span class="comment">// Generic type aliases</span>
+<span class="keyword">type</span> <span class="type">ApiResponse</span>&lt;T&gt; = {
+    data: T;
+    status: <span class="type">number</span>;
+    message: <span class="type">string</span>;
+};
+
+<span class="keyword">let</span> userResponse: <span class="type">ApiResponse</span>&lt;{ id: <span class="type">number</span>; name: <span class="type">string</span> }&gt; = {
+    data: { id: 1, name: <span class="string">"John"</span> },
+    status: 200,
+    message: <span class="string">"Success"</span>
+};</pre>
+            </div>
+        </div>
+
+        <!-- 10. Decorators -->
+        <div class="section">
+            <h2>10. Decorators</h2>
+            <div class="explanation">
+                <p>Decorators are special declarations that can be attached to classes, methods, properties, or parameters. They allow you to modify or annotate classes and their members. Note: Decorators require enabling experimentalDecorators in tsconfig.json.</p>
+            </div>
+
+            <div class="code-block">
+                <pre><span class="comment">// Class decorator</span>
+<span class="keyword">function</span> <span class="function">sealed</span>(constructor: <span class="type">Function</span>) {
+    Object.seal(constructor);
+    Object.seal(constructor.prototype);
+}
+
+@sealed
+<span class="keyword">class</span> <span class="type">Person</span> {
+    name: <span class="type">string</span>;
+    <span class="keyword">constructor</span>(name: <span class="type">string</span>) {
+        <span class="keyword">this</span>.name = name;
+    }
+}
+
+<span class="comment">// Method decorator</span>
+<span class="keyword">function</span> <span class="function">log</span>(target: <span class="type">any</span>, propertyKey: <span class="type">string</span>, descriptor: <span class="type">PropertyDescriptor</span>) {
+    <span class="keyword">const</span> originalMethod = descriptor.value;
+    
+    descriptor.value = <span class="keyword">function</span>(...args: <span class="type">any[]</span>) {
+        console.log(`Calling ${propertyKey} with args:`, args);
+        <span class="keyword">const</span> result = originalMethod.apply(<span class="keyword">this</span>, args);
+        console.log(`Result:`, result);
+        <span class="keyword">return</span> result;
+    };
+    
+    <span class="keyword">return</span> descriptor;
+}
+
+<span class="keyword">class</span> <span class="type">Calculator</span> {
+    @log
+    add(a: <span class="type">number</span>, b: <span class="type">number</span>): <span class="type">number</span> {
+        <span class="keyword">return</span> a + b;
+    }
+}
+
+<span class="comment">// Property decorator</span>
+<span class="keyword">function</span> <span class="function">readonly</span>(target: <span class="type">any</span>, propertyKey: <span class="type">string</span>) {
+    Object.defineProperty(target, propertyKey, {
+        writable: false
+    });
+}
+
+<span class="keyword">class</span> <span class="type">Config</span> {
+    @readonly
+    apiKey: <span class="type">string</span> = <span class="string">"secret-key"</span>;
+}
+
+<span class="comment">// Parameter decorator</span>
+<span class="keyword">function</span> <span class="function">required</span>(target: <span class="type">any</span>, propertyKey: <span class="type">string</span>, parameterIndex: <span class="type">number</span>) {
+    console.log(`Parameter ${parameterIndex} in ${propertyKey} is required`);
+}
+
+<span class="keyword">class</span> <span class="type">User</span> {
+    <span class="function">greet</span>(@required name: <span class="type">string</span>) {
+        console.log(`Hello, ${name}!`);
+    }
+}
+
+<span class="comment">// Decorator factory (returns decorator)</span>
+<span class="keyword">function</span> <span class="function">component</span>(options: { selector: <span class="type">string</span> }) {
+    <span class="keyword">return function</span>(constructor: <span class="type">Function</span>) {
+        console.log(`Component with selector: ${options.selector}`);
+    };
+}
+
+@component({ selector: <span class="string">"app-root"</span> })
+<span class="keyword">class</span> <span class="type">AppComponent</span> {}</pre>
+            </div>
+        </div>
+
+        <!-- 11. Utility Types -->
+        <div class="section">
+            <h2>11. Utility Types (VERY IMPORTANT)</h2>
+            <div class="explanation">
+                <p>TypeScript provides several built-in utility types that help transform and manipulate existing types. These are incredibly powerful for creating flexible and reusable type definitions.</p>
+            </div>
+
+            <!-- Partial -->
+            <h3>1. Partial&lt;T&gt;</h3>
+            <div class="explanation">
+                <p>Makes all properties of type T optional. Useful when you want to update only some properties of an object.</p>
+            </div>
+            <div class="code-block">
+                <pre><span class="keyword">interface</span> <span class="type">User</span> {
+    id: <span class="type">number</span>;
+    name: <span class="type">string</span>;
+    email: <span class="type">string</span>;
+    age: <span class="type">number</span>;
+}
+
+<span class="comment">// All properties become optional</span>
+<span class="keyword">type</span> <span class="type">PartialUser</span> = Partial&lt;User&gt;;
+<span class="comment">// Equivalent to: { id?: number; name?: string; email?: string; age?: number; }</span>
+
+<span class="keyword">function</span> <span class="function">updateUser</span>(user: <span class="type">User</span>, updates: <span class="type">Partial</span>&lt;User&gt;): <span class="type">User</span> {
+    <span class="keyword">return</span> { ...user, ...updates };
+}
+
+<span class="keyword">const</span> user: <span class="type">User</span> = { id: 1, name: <span class="string">"John"</span>, email: <span class="string">"john@example.com"</span>, age: 30 };
+<span class="keyword">const</span> updated = updateUser(user, { age: 31 }); <span class="comment">// Only update age</span></pre>
+            </div>
+
+            <!-- Pick -->
+            <h3>2. Pick&lt;T, K&gt;</h3>
+            <div class="explanation">
+                <p>Creates a new type by picking specific properties K from type T. Use this when you only need a subset of properties.</p>
+            </div>
+            <div class="code-block">
+                <pre><span class="keyword">interface</span> <span class="type">Product</span> {
+    id: <span class="type">number</span>;
+    name: <span class="type">string</span>;
+    description: <span class="type">string</span>;
+    price: <span class="type">number</span>;
+    stock: <span class="type">number</span>;
+    category: <span class="type">string</span>;
+}
+
+<span class="comment">// Pick only specific properties</span>
+<span class="keyword">type</span> <span class="type">ProductPreview</span> = Pick&lt;Product, <span class="string">"id"</span> | <span class="string">"name"</span> | <span class="string">"price"</span>&gt;;
+<span class="comment">// Equivalent to: { id: number; name: string; price: number; }</span>
+
+<span class="keyword">const</span> preview: <span class="type">ProductPreview</span> = {
+    id: 1,
+    name: <span class="string">"Laptop"</span>,
+    price: 999
+    <span class="comment">// description, stock, category are not required</span>
+};</pre>
+            </div>
+
+            <!-- Omit -->
+            <h3>3. Omit&lt;T, K&gt;</h3>
+            <div class="explanation">
+                <p>Creates a new type by removing specific properties K from type T. Opposite of Pick - use when you want everything except certain properties.</p>
+            </div>
+            <div class="code-block">
+                <pre><span class="keyword">interface</span> <span class="type">Employee</span> {
+    id: <span class="type">number</span>;
+    name: <span class="type">string</span>;
+    email: <span class="type">string</span>;
+    salary: <span class="type">number</span>;
+    ssn: <span class="type">string</span>;
+}
+
+<span class="comment">// Omit sensitive information</span>
+<span class="keyword">type</span> <span class="type">PublicEmployee</span> = Omit&lt;Employee, <span class="string">"salary"</span> | <span class="string">"ssn"</span>&gt;;
+<span class="comment">// Equivalent to: { id: number; name: string; email: string; }</span>
+
+<span class="keyword">const</span> publicInfo: <span class="type">PublicEmployee</span> = {
+    id: 1,
+    name: <span class="string">"Alice"</span>,
+    email: <span class="string">"alice@company.com"</span>
+    <span class="comment">// salary and ssn are not allowed</span>
+};</pre>
+            </div>
+
+            <!-- Readonly -->
+            <h3>4. Readonly&lt;T&gt;</h3>
+            <div class="explanation">
+                <p>Makes all properties of type T readonly. Prevents modification of properties after initialization.</p>
+            </div>
+            <div class="code-block">
+                <pre><span class="keyword">interface</span> <span class="type">Configuration</span> {
+    apiUrl: <span class="type">string</span>;
+    timeout: <span class="type">number</span>;
+    retries: <span class="type">number</span>;
+}
+
+<span class="comment">// All properties become readonly</span>
+<span class="keyword">type</span> <span class="type">ReadonlyConfig</span> = Readonly&lt;Configuration&gt;;
+<span class="comment">// Equivalent to: { readonly apiUrl: string; readonly timeout: number; readonly retries: number; }</span>
+
+<span class="keyword">const</span> config: <span class="type">ReadonlyConfig</span> = {
+    apiUrl: <span class="string">"https://api.example.com"</span>,
+    timeout: 5000,
+    retries: 3
+};
+
+<span class="comment">// config.apiUrl = "new-url"; // Error: Cannot assign to 'apiUrl' because it is readonly</span></pre>
+            </div>
+
+            <!-- Record -->
+            <h3>5. Record&lt;K, T&gt;</h3>
+            <div class="explanation">
+                <p>Creates an object type with keys of type K and values of type T. Perfect for creating dictionaries or maps with specific key-value types.</p>
+            </div>
+            <div class="code-block">
+                <pre><span class="comment">// Create a dictionary with string keys and number values</span>
+<span class="keyword">type</span> <span class="type">Scores</span> = Record&lt;<span class="type">string</span>, <span class="type">number</span>&gt;;
+
+<span class="keyword">const</span> testScores: <span class="type">Scores</span> = {
+    math: 95,
+    science: 88,
+    english: 92
+};
+
+<span class="comment">// More specific example with union type keys</span>
+<span class="keyword">type</span> <span class="type">Role</span> = <span class="string">"admin"</span> | <span class="string">"user"</span> | <span class="string">"guest"</span>;
+
+<span class="keyword">interface</span> <span class="type">Permission</span> {
+    read: <span class="type">boolean</span>;
+    write: <span class="type">boolean</span>;
+    delete: <span class="type">boolean</span>;
+}
+
+<span class="keyword">type</span> <span class="type">RolePermissions</span> = Record&lt;Role, Permission&gt;;
+
+<span class="keyword">const</span> permissions: <span class="type">RolePermissions</span> = {
+    admin: { read: true, write: true, delete: true },
+    user: { read: true, write: true, delete: false },
+    guest: { read: true, write: false, delete: false }
+};</pre>
+            </div>
+
+            <!-- Extract -->
+            <h3>6. Extract&lt;T, U&gt;</h3>
+            <div class="explanation">
+                <p>Extracts from type T those types that are assignable to type U. Filters types based on compatibility.</p>
+            </div>
+            <div class="code-block">
+                <pre><span class="comment">// Extract specific types from a union</span>
+<span class="keyword">type</span> <span class="type">AllTypes</span> = <span class="type">string</span> | <span class="type">number</span> | <span class="type">boolean</span> | <span class="type">null</span>;
+
+<span class="keyword">type</span> <span class="type">PrimitiveTypes</span> = Extract&lt;AllTypes, <span class="type">string</span> | <span class="type">number</span>&gt;;
+<span class="comment">// Result: string | number</span>
+
+<span class="comment">// Extract specific string literals</span>
+<span class="keyword">type</span> <span class="type">Status</span> = <span class="string">"pending"</span> | <span class="string">"approved"</span> | <span class="string">"rejected"</span> | <span class="string">"cancelled"</span>;
+
+<span class="keyword">type</span> <span class="type">ActiveStatus</span> = Extract&lt;Status, <span class="string">"pending"</span> | <span class="string">"approved"</span>&gt;;
+<span class="comment">// Result: "pending" | "approved"</span>
+
+<span class="keyword">let</span> status: <span class="type">ActiveStatus</span> = <span class="string">"pending"</span>; <span class="comment">// Valid</span>
+<span class="comment">// let status: ActiveStatus = "cancelled"; // Error</span></pre>
+            </div>
+
+            <!-- Exclude -->
+            <h3>7. Exclude&lt;T, U&gt;</h3>
+            <div class="explanation">
+                <p>Removes from type T those types that are assignable to type U. Opposite of Extract - filters out unwanted types.</p>
+            </div>
+            <div class="code-block">
+                <pre><span class="comment">// Exclude specific types from a union</span>
+<span class="keyword">type</span> <span class="type">AllValues</span> = <span class="type">string</span> | <span class="type">number</span> | <span class="type">boolean</span> | <span class="type">null</span> | <span class="type">undefined</span>;
+
+<span class="keyword">type</span> <span class="type">NonNullable</span> = Exclude&lt;AllValues, <span class="type">null</span> | <span class="type">undefined</span>&gt;;
+<span class="comment">// Result: string | number | boolean</span>
+
+<span class="comment">// Exclude function types</span>
+<span class="keyword">type</span> <span class="type">MixedTypes</span> = <span class="type">string</span> | <span class="type">number</span> | (() => <span class="type">void</span>);
+
+<span class="keyword">type</span> <span class="type">NonFunctionTypes</span> = Exclude&lt;MixedTypes, <span class="type">Function</span>&gt;;
+<span class="comment">// Result: string | number</span>
+
+<span class="comment">// Practical example: exclude error states</span>
+<span class="keyword">type</span> <span class="type">Response</span> = <span class="string">"success"</span> | <span class="string">"error"</span> | <span class="string">"loading"</span> | <span class="string">"timeout"</span>;
+<span class="keyword">type</span> <span class="type">SuccessResponse</span> = Exclude&lt;Response, <span class="string">"error"</span> | <span class="string">"timeout"</span>&gt;;
+<span class="comment">// Result: "success" | "loading"</span></pre>
+            </div>
+
+            <!-- Awaited -->
+            <h3>8. Awaited&lt;T&gt;</h3>
+            <div class="explanation">
+                <p>Unwraps the type of a Promise. Gets the resolved type of a Promise, useful when working with async functions.</p>
+            </div>
+            <div class="code-block">
+                <pre><span class="comment">// Basic Promise unwrapping</span>
+<span class="keyword">type</span> <span class="type">PromiseString</span> = Promise&lt;<span class="type">string</span>&gt;;
+<span class="keyword">type</span> <span class="type">UnwrappedString</span> = Awaited&lt;PromiseString&gt;;
+<span class="comment">// Result: string</span>
+
+<span class="comment">// Nested Promises</span>
+<span class="keyword">type</span> <span class="type">NestedPromise</span> = Promise&lt;Promise&lt;<span class="type">number</span>&gt;&gt;;
+<span class="keyword">type</span> <span class="type">UnwrappedNumber</span> = Awaited&lt;NestedPromise&gt;;
+<span class="comment">// Result: number (fully unwrapped)</span>
+
+<span class="comment">// Practical example with async function</span>
+<span class="keyword">async function</span> <span class="function">fetchUser</span>(): Promise&lt;{ id: <span class="type">number</span>; name: <span class="type">string</span> }&gt; {
+    <span class="keyword">return</span> { id: 1, name: <span class="string">"Alice"</span> };
+}
+
+<span class="keyword">type</span> <span class="type">FetchUserReturn</span> = Awaited&lt;ReturnType&lt;<span class="keyword">typeof</span> fetchUser&gt;&gt;;
+<span class="comment">// Result: { id: number; name: string; }</span>
+
+<span class="keyword">const</span> user: <span class="type">FetchUserReturn</span> = { id: 1, name: <span class="string">"Alice"</span> };</pre>
+            </div>
+
+            <!-- Parameters -->
+            <h3>9. Parameters&lt;T&gt;</h3>
+            <div class="explanation">
+                <p>Extracts the parameter types of a function type as a tuple. Useful for getting function argument types.</p>
+            </div>
+            <div class="code-block">
+                <pre><span class="comment">// Extract parameters from a function</span>
+<span class="keyword">function</span> <span class="function">createUser</span>(name: <span class="type">string</span>, age: <span class="type">number</span>, email: <span class="type">string</span>) {
+    <span class="keyword">return</span> { name, age, email };
+}
+
+<span class="keyword">type</span> <span class="type">CreateUserParams</span> = Parameters&lt;<span class="keyword">typeof</span> createUser&gt;;
+<span class="comment">// Result: [name: string, age: number, email: string]</span>
+
+<span class="keyword">const</span> params: <span class="type">CreateUserParams</span> = [<span class="string">"John"</span>, 30, <span class="string">"john@example.com"</span>];
+
+<span class="comment">// Using with function types</span>
+<span class="keyword">type</span> <span class="type">MathOperation</span> = (a: <span class="type">number</span>, b: <span class="type">number</span>) => <span class="type">number</span>;
+<span class="keyword">type</span> <span class="type">MathParams</span> = Parameters&lt;MathOperation&gt;;
+<span class="comment">// Result: [a: number, b: number]</span>
+
+<span class="comment">// Practical wrapper function</span>
+<span class="keyword">function</span> <span class="function">loggedCreateUser</span>(...args: <span class="type">Parameters</span>&lt;<span class="keyword">typeof</span> createUser&gt;) {
+    console.log(<span class="string">"Creating user with:"</span>, args);
+    <span class="keyword">return</span> createUser(...args);
+}</pre>
+            </div>
+
+            <!-- NonNullable -->
+            <h3>10. NonNullable&lt;T&gt;</h3>
+            <div class="explanation">
+                <p>Removes null and undefined from type T. Ensures a value cannot be null or undefined.</p>
+            </div>
+            <div class="code-block">
+                <pre><span class="comment">// Remove null and undefined from a union</span>
+<span class="keyword">type</span> <span class="type">NullableString</span> = <span class="type">string</span> | <span class="type">null</span> | <span class="type">undefined</span>;
+<span class="keyword">type</span> <span class="type">DefiniteString</span> = NonNullable&lt;NullableString&gt;;
+<span class="comment">// Result: string</span>
+
+<span class="comment">// Practical example with optional values</span>
+<span class="keyword">interface</span> <span class="type">UserProfile</span> {
+    name: <span class="type">string</span>;
+    avatar?: <span class="type">string</span> | <span class="type">null</span>;
+    bio?: <span class="type">string</span> | <span class="type">null</span>;
+}
+
+<span class="keyword">type</span> <span class="type">AvatarType</span> = NonNullable&lt;UserProfile[<span class="string">"avatar"</span>]&gt;;
+<span class="comment">// Result: string (removes undefined and null)</span>
+
+<span class="comment">// Function that ensures non-null values</span>
+<span class="keyword">function</span> <span class="function">processValue</span>&lt;T&gt;(value: T): NonNullable&lt;T&gt; {
+    <span class="keyword">if</span> (value === <span class="type">null</span> || value === <span class="type">undefined</span>) {
+        <span class="keyword">throw new</span> Error(<span class="string">"Value cannot be null or undefined"</span>);
+    }
+    <span class="keyword">return</span> value <span class="keyword">as</span> NonNullable&lt;T&gt;;
+}</pre>
+            </div>
+
+            <!-- ReturnType -->
+            <h3>11. ReturnType&lt;T&gt;</h3>
+            <div class="explanation">
+                <p>Extracts the return type of a function type. Perfect for working with function return values without repeating type definitions.</p>
+            </div>
+            <div class="code-block">
+                <pre><span class="comment">// Extract return type from a function</span>
+<span class="keyword">function</span> <span class="function">getUser</span>() {
+    <span class="keyword">return</span> {
+        id: 1,
+        name: <span class="string">"John Doe"</span>,
+        email: <span class="string">"john@example.com"</span>,
+        isActive: true
+    };
+}
+
+<span class="keyword">type</span> <span class="type">User</span> = ReturnType&lt;<span class="keyword">typeof</span> getUser&gt;;
+<span class="comment">// Result: { id: number; name: string; email: string; isActive: boolean; }</span>
+
+<span class="keyword">const</span> newUser: <span class="type">User</span> = {
+    id: 2,
+    name: <span class="string">"Alice"</span>,
+    email: <span class="string">"alice@example.com"</span>,
+    isActive: false
+};
+
+<span class="comment">// With async functions</span>
+<span class="keyword">async function</span> <span class="function">fetchData</span>() {
+    <span class="keyword">return</span> { status: <span class="string">"success"</span>, data: [1, 2, 3] };
+}
+
+<span class="keyword">type</span> <span class="type">FetchDataReturn</span> = ReturnType&lt;<span class="keyword">typeof</span> fetchData&gt;;
+<span class="comment">// Result: Promise&lt;{ status: string; data: number[]; }&gt;</span>
+
+<span class="comment">// To get the resolved value, combine with Awaited</span>
+<span class="keyword">type</span> <span class="type">FetchDataResolved</span> = Awaited&lt;ReturnType&lt;<span class="keyword">typeof</span> fetchData&gt;&gt;;
+<span class="comment">// Result: { status: string; data: number[]; }</span></pre>
+            </div>
+
+            <!-- InstanceType -->
+            <h3>12. InstanceType&lt;T&gt;</h3>
+            <div class="explanation">
+                <p>Extracts the instance type of a constructor function. Gets the type of an instance created by a class or constructor.</p>
+            </div>
+            <div class="code-block">
+                <pre><span class="comment">// Extract instance type from a class</span>
+<span class="keyword">class</span> <span class="type">Person</span> {
+    name: <span class="type">string</span>;
+    age: <span class="type">number</span>;
+
+    <span class="keyword">constructor</span>(name: <span class="type">string</span>, age: <span class="type">number</span>) {
+        <span class="keyword">this</span>.name = name;
+        <span class="keyword">this</span>.age = age;
+    }
+
+    greet() {
+        <span class="keyword">return</span> `Hello, I'm ${<span class="keyword">this</span>.name}`;
+    }
+}
+
+<span class="keyword">type</span> <span class="type">PersonInstance</span> = InstanceType&lt;<span class="keyword">typeof</span> Person&gt;;
+<span class="comment">// Result: Person (the instance type)</span>
+
+<span class="keyword">const</span> person: <span class="type">PersonInstance</span> = <span class="keyword">new</span> Person(<span class="string">"Alice"</span>, 30);
+
+<span class="comment">// With constructor function type</span>
+<span class="keyword">type</span> <span class="type">Constructor</span> = <span class="keyword">new</span> (...args: <span class="type">any[]</span>) => { x: <span class="type">number</span>; y: <span class="type">number</span> };
+<span class="keyword">type</span> <span class="type">Point</span> = InstanceType&lt;Constructor&gt;;
+<span class="comment">// Result: { x: number; y: number; }</span>
+
+<span class="comment">// Practical factory pattern</span>
+<span class="keyword">function</span> <span class="function">createInstance</span>&lt;T <span class="keyword">extends</span> <span class="keyword">new</span> (...args: <span class="type">any[]</span>) => <span class="type">any</span>&gt;(
+    constructor: T,
+    ...args: <span class="type">any[]</span>
+): InstanceType&lt;T&gt; {
+    <span class="keyword">return new</span> constructor(...args);
+}
+
+<span class="keyword">const</span> personInstance = createInstance(Person, <span class="string">"Bob"</span>, 25);</pre>
+            </div>
+
+            <!-- ThisType -->
+            <h3>13. ThisType&lt;T&gt;</h3>
+            <div class="explanation">
+                <p>Marker utility type that doesn't transform types but provides contextual 'this' type for object literals. Used to define the type of 'this' in methods.</p>
+            </div>
+            <div class="code-block">
+                <pre><span class="comment">// Define the shape of 'this' in object methods</span>
+<span class="keyword">interface</span> <span class="type">Methods</span> {
+    greet(): <span class="type">void</span>;
+    introduce(): <span class="type">void</span>;
+}
+
+<span class="keyword">interface</span> <span class="type">Data</span> {
+    name: <span class="type">string</span>;
+    age: <span class="type">number</span>;
+}
+
+<span class="comment">// ThisType tells TypeScript what 'this' refers to</span>
+<span class="keyword">function</span> <span class="function">createObject</span>(data: <span class="type">Data</span>, methods: Methods & ThisType&lt;Data & Methods&gt;) {
+    <span class="keyword">return</span> { ...data, ...methods };
+}
+
+<span class="keyword">const</span> obj = createObject(
+    { name: <span class="string">"Alice"</span>, age: 30 },
+    {
+        greet() {
+            console.log(`Hello, ${<span class="keyword">this</span>.name}`); <span class="comment">// 'this' is correctly typed</span>
+        },
+        introduce() {
+            console.log(`I'm ${<span class="keyword">this</span>.name}, ${<span class="keyword">this</span>.age} years old`);
+        }
+    }
+);
+
+<span class="comment">// More practical example with Vue-style options</span>
+<span class="keyword">interface</span> <span class="type">ComponentOptions</span>&lt;D, M&gt; {
+    data: D;
+    methods: M & ThisType&lt;D & M&gt;;
+}
+
+<span class="keyword">function</span> <span class="function">createComponent</span>&lt;D, M&gt;(options: <span class="type">ComponentOptions</span>&lt;D, M&gt;) {
+    <span class="keyword">return</span> { ...options.data, ...options.methods };
+}
+
+<span class="keyword">const</span> component = createComponent({
+    data: { count: 0 },
+    methods: {
+        increment() {
+            <span class="keyword">this</span>.count++; <span class="comment">// TypeScript knows 'this.count' is a number</span>
+        },
+        getCount() {
+            <span class="keyword">return</span> <span class="keyword">this</span>.count;
+        }
+    }
+});</pre>
+            </div>
+
+            <!-- Bonus Utility Types -->
+            <h3>Bonus: Combining Utility Types</h3>
+            <div class="explanation">
+                <p>You can combine multiple utility types to create powerful type transformations:</p>
+            </div>
+            <div class="code-block">
+                <pre><span class="comment">// Combine Partial and Pick</span>
+<span class="keyword">interface</span> <span class="type">FullUser</span> {
+    id: <span class="type">number</span>;
+    name: <span class="type">string</span>;
+    email: <span class="type">string</span>;
+    password: <span class="type">string</span>;
+    createdAt: Date;
+}
+
+<span class="keyword">type</span> <span class="type">UserUpdate</span> = Partial&lt;Pick&lt;FullUser, <span class="string">"name"</span> | <span class="string">"email"</span>&gt;&gt;;
+<span class="comment">// Result: { name?: string; email?: string; }</span>
+
+<span class="comment">// Combine Readonly and Omit</span>
+<span class="keyword">type</span> <span class="type">PublicUserData</span> = Readonly&lt;Omit&lt;FullUser, <span class="string">"password"</span>&gt;&gt;;
+<span class="comment">// Result: { readonly id: number; readonly name: string; ... } without password</span>
+
+<span class="comment">// Combine Record with other types</span>
+<span class="keyword">type</span> <span class="type">FormErrors</span> = Partial&lt;Record&lt;keyof FullUser, <span class="type">string</span>&gt;&gt;;
+<span class="comment">// Result: { id?: string; name?: string; email?: string; ... }</span>
+
+<span class="keyword">const</span> errors: <span class="type">FormErrors</span> = {
+    email: <span class="string">"Invalid email format"</span>,
+    password: <span class="string">"Password too short"</span>
+};</pre>
+            </div>
+        </div>
+
+        <!-- Summary Section -->
+        <div class="section">
+            <h2>Quick Reference Summary</h2>
+            <div class="explanation">
+                <p><strong>Type Transformations:</strong></p>
+                <ul>
+                    <li><span class="highlight">Partial&lt;T&gt;</span> - Make all properties optional</li>
+                    <li><span class="highlight">Required&lt;T&gt;</span> - Make all properties required (opposite of Partial)</li>
+                    <li><span class="highlight">Readonly&lt;T&gt;</span> - Make all properties readonly</li>
+                </ul>
+                
+                <p><strong>Property Manipulation:</strong></p>
+                <ul>
+                    <li><span class="highlight">Pick&lt;T, K&gt;</span> - Select specific properties</li>
+                    <li><span class="highlight">Omit&lt;T, K&gt;</span> - Remove specific properties</li>
+                    <li><span class="highlight">Record&lt;K, T&gt;</span> - Create object type with specific keys and value type</li>
+                </ul>
+                
+                <p><strong>Type Filtering:</strong></p>
+                <ul>
+                    <li><span class="highlight">Extract&lt;T, U&gt;</span> - Keep only types assignable to U</li>
+                    <li><span class="highlight">Exclude&lt;T, U&gt;</span> - Remove types assignable to U</li>
+                    <li><span class="highlight">NonNullable&lt;T&gt;</span> - Remove null and undefined</li>
+                </ul>
+                
+                <p><strong>Function & Class Utilities:</strong></p>
+                <ul>
+                    <li><span class="highlight">Parameters&lt;T&gt;</span> - Get function parameter types</li>
+                    <li><span class="highlight">ReturnType&lt;T&gt;</span> - Get function return type</li>
+                    <li><span class="highlight">InstanceType&lt;T&gt;</span> - Get class instance type</li>
+                    <li><span class="highlight">Awaited&lt;T&gt;</span> - Unwrap Promise type</li>
+                    <li><span class="highlight">ThisType&lt;T&gt;</span> - Define 'this' context type</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="section" style="text-align: center; background: linear-gradient(135deg, #1a1e29 0%, #2d333b 100%);">
+            <h2>🎓 End of TypeScript Notes</h2>
+            <p style="margin-top: 1rem; font-size: 1.1rem;">Master these concepts to write better, safer TypeScript code!</p>
+            <p style="margin-top: 0.5rem; color: #8b949e;">Created with ❤️ for TypeScript learners</p>
+        </div>
+    </div>
+
+    <script>
+        function downloadPDF() {
+            const downloadBtn = document.querySelector('.download-btn');
+            
+            // Show loading state
+            downloadBtn.textContent = '⏳ Preparing download...';
+            downloadBtn.disabled = true;
+            
+            try {
+                // Get the content
+                const content = document.getElementById('content');
+                const title = 'TypeScript Complete Notes';
+                
+                // Create a printable version
+                const printWindow = window.open('', '', 'height=600,width=800');
+                
+                printWindow.document.write('<html><head><title>' + title + '</title>');
+                printWindow.document.write('<style>');
+                printWindow.document.write(`
+                    * {
+                        margin: 0;
+                        padding: 0;
+                        box-sizing: border-box;
+                    }
+                    body {
+                        background: #0d1117;
+                        color: #c9d1d9;
+                        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                        line-height: 1.6;
+                        padding: 20px;
+                    }
+                    .section {
+                        background: #161b22;
+                        border: 1px solid #30363d;
+                        border-radius: 8px;
+                        padding: 2rem;
+                        margin-bottom: 2rem;
+                        page-break-inside: avoid;
+                    }
+                    .section h2 {
+                        color: #58a6ff;
+                        font-size: 1.8rem;
+                        margin-bottom: 1rem;
+                        padding-bottom: 0.5rem;
+                        border-bottom: 2px solid #21262d;
+                    }
+                    .section h3 {
+                        color: #79c0ff;
+                        font-size: 1.4rem;
+                        margin-top: 1.5rem;
+                        margin-bottom: 0.8rem;
+                    }
+                    .explanation {
+                        background: #0d1117;
+                        padding: 1rem;
+                        border-left: 4px solid #58a6ff;
+                        margin-bottom: 1rem;
+                        border-radius: 4px;
+                    }
+                    .code-block {
+                        background: #0d1117;
+                        border: 1px solid #30363d;
+                        border-radius: 6px;
+                        padding: 1rem;
+                        margin: 1rem 0;
+                        overflow-x: auto;
+                    }
+                    .code-block pre {
+                        margin: 0;
+                        color: #c9d1d9;
+                        font-family: 'Courier New', monospace;
+                        font-size: 0.85rem;
+                        white-space: pre-wrap;
+                        word-wrap: break-word;
+                    }
+                    .keyword { color: #ff7b72; }
+                    .type { color: #79c0ff; }
+                    .string { color: #a5d6ff; }
+                    .comment { color: #8b949e; font-style: italic; }
+                    .function { color: #d2a8ff; }
+                    ul {
+                        margin-left: 2rem;
+                        margin-top: 0.5rem;
+                    }
+                    ul li {
+                        margin-bottom: 0.5rem;
+                    }
+                    .highlight {
+                        background: #1f6feb;
+                        color: white;
+                        padding: 2px 6px;
+                        border-radius: 3px;
+                        font-weight: 600;
+                    }
+                    @media print {
+                        body { padding: 0; }
+                        .section { page-break-inside: avoid; }
+                    }
+                    h1 {
+                        color: #58a6ff;
+                        text-align: center;
+                        margin-bottom: 2rem;
+                        font-size: 2.5rem;
+                    }
+                `);
+                printWindow.document.write('</style></head><body>');
+                printWindow.document.write('<h1>📘 TypeScript Complete Notes</h1>');
+                printWindow.document.write(content.innerHTML);
+                printWindow.document.write('</body></html>');
+                
+                printWindow.document.close();
+                
+                // Wait for content to load then trigger print
+                setTimeout(() => {
+                    printWindow.focus();
+                    printWindow.print();
+                    
+                    // Reset button after a delay
+                    setTimeout(() => {
+                        downloadBtn.textContent = '📥 Download as PDF';
+                        downloadBtn.disabled = false;
+                    }, 1000);
+                }, 500);
+                
+            } catch (error) {
+                console.error('Error generating PDF:', error);
+                downloadBtn.textContent = '❌ Error - Try Again';
+                setTimeout(() => {
+                    downloadBtn.textContent = '📥 Download as PDF';
+                    downloadBtn.disabled = false;
+                }, 2000);
+            }
+        }
+    </script>
+</body>
+</html>
